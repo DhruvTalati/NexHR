@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, {useCallback, useEffect, useRef, useState } from "react";
 import {
   CheckCircle2,
   Download,
@@ -96,7 +96,7 @@ export default function EmployeeDocuments({ employeeId }) {
   const [rejectingId, setRejectingId] = useState(null);
   const [rejectionReason, setRejectionReason] = useState("");
 
-  const loadDocuments = async () => {
+  const loadDocuments = useCallback(async () => {
     try {
       setLoading(true);
       setError("");
@@ -109,11 +109,11 @@ export default function EmployeeDocuments({ employeeId }) {
     } finally {
       setLoading(false);
     }
-  };
+  });
 
   useEffect(() => {
     loadDocuments();
-  }, [employeeId]);
+  }, [loadDocuments]);
 
   const resetUploadForm = () => {
     setSelectedFile(null);

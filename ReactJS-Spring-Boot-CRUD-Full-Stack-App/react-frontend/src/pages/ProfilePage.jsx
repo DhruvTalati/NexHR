@@ -8,7 +8,6 @@ import {
   MapPin,
   CalendarDays,
   Phone,
-  Pencil,
   LockKeyhole,
 } from "lucide-react";
 

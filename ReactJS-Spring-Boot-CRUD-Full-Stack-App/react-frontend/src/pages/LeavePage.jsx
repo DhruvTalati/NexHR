@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect,useCallback, useState } from "react";
 import {
   CalendarDays,
   CheckCircle2,
@@ -163,7 +163,7 @@ export default function LeavePage() {
     }
   };
 
-  const loadPage = async () => {
+  const loadPage = useCallback(async () => {
     try {
       setLoading(true);
 
@@ -175,11 +175,11 @@ export default function LeavePage() {
     } finally {
       setLoading(false);
     }
-  };
+  });
 
   useEffect(() => {
     loadPage();
-  }, [user?.role]);
+  }, [loadPage]);
 
   const handleRefresh = async () => {
     try {
