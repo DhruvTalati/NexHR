@@ -42,19 +42,6 @@ function formatStatus(status) {
   );
 }
 
-function formatDateTime(value) {
-  if (!value) {
-    return "—";
-  }
-
-  const date = new Date(value);
-
-  return date.toLocaleString("en-IN", {
-    dateStyle: "medium",
-    timeStyle: "short",
-  });
-}
-
 function formatTime(value) {
   if (!value) {
     return "—";

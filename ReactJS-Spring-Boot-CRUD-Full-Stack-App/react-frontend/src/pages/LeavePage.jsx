@@ -175,7 +175,7 @@ export default function LeavePage() {
     } finally {
       setLoading(false);
     }
-  });
+  },[]);
 
   useEffect(() => {
     loadPage();

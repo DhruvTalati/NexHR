@@ -109,7 +109,7 @@ export default function EmployeeDocuments({ employeeId }) {
     } finally {
       setLoading(false);
     }
-  });
+  },[]);
 
   useEffect(() => {
     loadDocuments();
