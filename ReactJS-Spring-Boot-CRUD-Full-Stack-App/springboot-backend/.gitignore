@@ -87,8 +87,13 @@ desktop.ini
 # ------------------------------------------
 # Spring Boot Configuration
 # ------------------------------------------
-src/main/resources/application.properties
-src/main/resources/application-*.properties
+
+# Do not ignore application.properties.
+# It contains environment-variable placeholders only.
+
+# Ignore only local secret configuration files if needed:
+application-local.properties
+application-secret.properties
 
 # ------------------------------------------
 # Local Database / Temporary Files
