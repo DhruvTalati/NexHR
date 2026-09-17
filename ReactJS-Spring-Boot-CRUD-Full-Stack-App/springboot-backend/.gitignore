@@ -1,33 +1,108 @@
-HELP.md
+# ==========================================
+# NexHR - Spring Boot Backend .gitignore
+# ==========================================
+
+# ------------------------------------------
+# Maven
+# ------------------------------------------
 target/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
 
-### STS ###
+# Maven Wrapper
+.mvn/wrapper/maven-wrapper.properties
+
+# ------------------------------------------
+# Java
+# ------------------------------------------
+*.class
+*.jar
+*.war
+*.ear
+hs_err_pid*
+
+# ------------------------------------------
+# Spring Tool Suite / Eclipse
+# ------------------------------------------
 .apt_generated
 .classpath
 .factorypath
 .project
-.settings
+.settings/
 .springBeans
 .sts4-cache
 
-### IntelliJ IDEA ###
-.idea
+# ------------------------------------------
+# IntelliJ IDEA
+# ------------------------------------------
+.idea/
 *.iws
 *.iml
 *.ipr
+out/
 
-### NetBeans ###
+# ------------------------------------------
+# NetBeans
+# ------------------------------------------
 /nbproject/private/
 /nbbuild/
 /dist/
 /nbdist/
 /.nb-gradle/
+
+# ------------------------------------------
+# Visual Studio Code
+# ------------------------------------------
+.vscode/
+.code-workspace
+
+# ------------------------------------------
+# Build Files
+# ------------------------------------------
 build/
 !**/src/main/**/build/
 !**/src/test/**/build/
 
-### VS Code ###
-.vscode/
+# ------------------------------------------
+# Logs
+# ------------------------------------------
+*.log
+logs/
+
+# ------------------------------------------
+# Operating System Files
+# ------------------------------------------
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ------------------------------------------
+# Environment Variables
+# ------------------------------------------
+.env
+.env.*
+!.env.example
+
+# ------------------------------------------
+# Spring Boot Configuration
+# ------------------------------------------
+src/main/resources/application.properties
+src/main/resources/application-*.properties
+
+# ------------------------------------------
+# Local Database / Temporary Files
+# ------------------------------------------
+*.sqlite
+*.sqlite3
+*.db
+*.h2.db
+
+# ------------------------------------------
+# Temporary Files
+# ------------------------------------------
+*.tmp
+*.temp
+*.swp
+*.swo
+*~
