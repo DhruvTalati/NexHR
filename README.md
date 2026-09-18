@@ -1,839 +1,1513 @@
-<div align="center">
+# NexHR - Human Resource Management System
 
-# NexHR
+<p align="center">
+  <strong>A secure and scalable Human Resource Management System built with Java and Spring Boot.</strong>
+</p>
 
-### Modern Full-Stack Human Resource Management System
+<p align="center">
+  NexHR centralizes employee information, HR operations, authentication, leave management, attendance, and organizational workflows into a single application.
+</p>
 
-A secure and scalable HR platform for managing employees, attendance, leave requests, documents, and organizational operations from one centralized dashboard.
-
-<br />
-
-![React](https://img.shields.io/badge/Frontend-React.js-61DAFB?style=for-the-badge&logo=react&logoColor=black)
-![Spring Boot](https://img.shields.io/badge/Backend-Spring%20Boot-6DB33F?style=for-the-badge&logo=springboot&logoColor=white)
-![Java](https://img.shields.io/badge/Language-Java-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white)
-![MySQL](https://img.shields.io/badge/Database-MySQL-4479A1?style=for-the-badge&logo=mysql&logoColor=white)
-![JWT](https://img.shields.io/badge/Auth-JWT-000000?style=for-the-badge&logo=jsonwebtokens&logoColor=white)
-
-<br />
-
-[Features](#-features) •
-[Architecture](#-system-architecture) •
-[Installation](#-installation-and-setup) •
-[API](#-api-overview) •
-[Deployment](#-deployment) •
-[Author](#-author)
-
-</div>
+<p align="center">
+  <img src="https://img.shields.io/badge/Java-17%2B-orange?style=for-the-badge&logo=openjdk" alt="Java"/>
+  <img src="https://img.shields.io/badge/Spring%20Boot-3.x-brightgreen?style=for-the-badge&logo=springboot" alt="Spring Boot"/>
+  <img src="https://img.shields.io/badge/MySQL-8.x-blue?style=for-the-badge&logo=mysql" alt="MySQL"/>
+  <img src="https://img.shields.io/badge/Spring%20Security-JWT-success?style=for-the-badge" alt="Spring Security"/>
+  <img src="https://img.shields.io/badge/Maven-Build-red?style=for-the-badge&logo=apachemaven" alt="Maven"/>
+  <img src="https://img.shields.io/badge/REST-API-informational?style=for-the-badge" alt="REST API"/>
+</p>
 
 ---
 
-## About NexHR
+## Table of Contents
 
-**NexHR** is a full-stack Human Resource Management System designed to digitize and simplify everyday HR operations.
-
-Traditional HR workflows often involve spreadsheets, disconnected records, manual attendance tracking, and difficult-to-manage leave processes. NexHR brings these activities into a unified platform with a modern interface, secure authentication, structured APIs, and a centralized relational database.
-
-The application is built with:
-
-- **React.js** for a responsive and interactive frontend
-- **Spring Boot** for RESTful backend services
-- **Spring Security and JWT** for authentication and authorization
-- **MySQL** for persistent data storage
-- **JPA/Hibernate** for database interaction
-
-NexHR is designed to demonstrate real-world full-stack development practices, including frontend-backend integration, role-based access, CRUD operations, document handling, and environment-based configuration.
+- [Overview](#overview)
+- [Problem Statement](#problem-statement)
+- [Project Objectives](#project-objectives)
+- [Features](#features)
+- [User Roles](#user-roles)
+- [Technology Stack](#technology-stack)
+- [System Architecture](#system-architecture)
+- [Application Modules](#application-modules)
+- [Authentication and Authorization](#authentication-and-authorization)
+- [Database Design](#database-design)
+- [Project Structure](#project-structure)
+- [API Documentation](#api-documentation)
+- [Configuration](#configuration)
+- [Environment Variables](#environment-variables)
+- [Prerequisites](#prerequisites)
+- [Installation and Setup](#installation-and-setup)
+- [Running the Application](#running-the-application)
+- [Testing the APIs](#testing-the-apis)
+- [Deployment](#deployment)
+- [Production Configuration](#production-configuration)
+- [Security Practices](#security-practices)
+- [Error Handling](#error-handling)
+- [Challenges and Solutions](#challenges-and-solutions)
+- [Future Enhancements](#future-enhancements)
+- [Learning Outcomes](#learning-outcomes)
+- [Project Demonstration](#project-demonstration)
+- [Author](#author)
 
 ---
 
-## Why NexHR?
+## Overview
 
-NexHR focuses on solving common HR management challenges:
+NexHR is a Human Resource Management System developed to simplify and digitize essential HR activities.
 
-| Challenge | NexHR Solution |
-|---|---|
-| Scattered employee information | Centralized employee database |
-| Manual attendance records | Digital attendance management |
-| Unorganized leave requests | Structured leave workflow |
-| Difficult document access | Employee document management |
-| Unauthorized system access | JWT authentication and role-based authorization |
-| Disconnected HR operations | Unified dashboard and modular architecture |
+Traditional HR processes frequently depend on spreadsheets, emails, paper forms, and disconnected systems. These approaches can result in duplicated records, delayed approvals, inconsistent information, and limited visibility into employee-related operations.
+
+NexHR provides a centralized platform for managing HR-related information and workflows through a secure backend architecture and RESTful APIs.
+
+The backend is developed using **Java and Spring Boot** and uses **MySQL** for persistent data storage. The application follows a layered architecture that separates request handling, business logic, database operations, and security concerns.
+
+### Main Technologies
+
+- Java
+- Spring Boot
+- Spring Web
+- Spring Data JPA
+- Hibernate
+- Spring Security
+- JWT Authentication
+- MySQL
+- Maven
+- REST APIs
 
 ---
 
-## ✨ Features
+## Problem Statement
 
-### 🔐 Authentication and Authorization
+Organizations need a reliable and centralized system to manage employee-related information and HR operations.
 
-- Secure login functionality
-- JWT-based authentication
-- Protected routes and API endpoints
+Manual or disconnected processes can create challenges such as:
+
+- Difficulty maintaining employee records
+- Lack of centralized HR information
+- Time-consuming leave approval workflows
+- Limited attendance visibility
+- Repeated manual data entry
+- Inconsistent access control
+- Security risks caused by unprotected resources
+- Difficulty integrating different HR operations
+
+NexHR addresses these challenges by providing a structured, role-based, and API-driven HR management platform.
+
+---
+
+## Project Objectives
+
+The main objectives of NexHR are:
+
+- To centralize employee and HR-related information
+- To implement secure user authentication
+- To provide role-based access control
+- To expose reusable RESTful APIs
+- To manage relational data using MySQL
+- To follow a maintainable layered architecture
+- To implement input validation and exception handling
+- To separate sensitive configuration from source code
+- To prepare the application for cloud deployment
+- To demonstrate real-world backend development practices
+
+---
+
+## Features
+
+### Authentication
+
+- User registration
+- User login
+- JWT token generation
+- JWT token validation
+- Secure password storage
+- Protected API endpoints
+- Authentication failure handling
+
+### Authorization
+
 - Role-based access control
-- Separate administrative and employee access
-- Secure handling of authentication credentials
-- Token-based communication between frontend and backend
+- Restricted administrative operations
+- User-specific resource access
+- Protected routes using Spring Security
 
-### 👥 Employee Management
+### Employee Management
 
 - Create employee records
-- View all employees
-- View detailed employee profiles
+- View employee details
 - Update employee information
-- Delete employee records
-- Search and filter employees
-- Manage employee contact and professional details
-- Maintain department and designation information
+- Delete or deactivate employee records
+- Search and retrieve employees
+- Maintain employee-related information
 
-### 📊 HR Dashboard
+### Department Management
 
-- Centralized HR overview
-- Employee statistics
-- Attendance information
-- Leave-related summaries
-- Quick access to major HR modules
-- Organized navigation for administrative operations
+- Create departments
+- View departments
+- Update department details
+- Associate employees with departments
+- Organize employees based on departments
 
-### 🕒 Attendance Management
+### Leave Management
 
-- Record employee attendance
-- Track attendance status
-- Manage check-in and check-out information
-- View attendance records
-- Access attendance history
-- Support attendance-related HR workflows
-
-### 📝 Leave Management
-
-- Submit leave requests
-- View submitted leave requests
+- Apply for leave
+- Select leave type
+- Submit leave reason
+- Specify leave duration
+- View leave history
 - Track leave request status
 - Approve or reject leave requests
-- Manage leave balances
-- Maintain leave history
-- Support structured employee leave workflows
 
-### 📁 Document Management
+### Attendance Management
 
-- Upload employee documents
-- Associate documents with employees
-- Store important HR files
-- View available documents
-- Download documents when authorized
-- Maintain organized employee document records
+- Record attendance
+- Store attendance dates
+- Track check-in and check-out information
+- View attendance history
+- Maintain employee attendance records
 
-### 🔔 Notifications
+### Recruitment Management
 
-- Display important system updates
-- Show relevant HR notifications
-- Provide updates related to leave and administrative actions
-- Improve communication between users and HR administrators
+- Manage job openings
+- Store candidate information
+- Track applications
+- Maintain recruitment statuses
+- Organize hiring-related data
 
-### 📚 API Documentation
+### RESTful API
 
-- RESTful backend APIs
-- Swagger/OpenAPI integration
-- Interactive API documentation
-- Easier development and API testing
-- Clear separation between frontend and backend responsibilities
+- Standard HTTP methods
+- JSON-based request and response format
+- Structured API endpoints
+- Integration support for frontend applications
+- API testing through Postman
+
+### Validation and Error Handling
+
+- Request validation
+- Meaningful HTTP status codes
+- Centralized exception handling
+- Invalid request handling
+- Resource-not-found handling
+- Database error handling
 
 ---
 
-## 🛠️ Technology Stack
+## User Roles
 
-### Frontend
+NexHR can support different users based on their responsibilities.
 
-| Technology | Purpose |
-|---|---|
-| React.js | Component-based user interface |
-| JavaScript | Application logic |
-| HTML5 | Page structure |
-| CSS3 | Styling and layout |
-| Bootstrap / Custom CSS | Responsive UI design |
-| Axios | HTTP requests |
-| React Router | Client-side routing |
+### HR Administrator
+
+The HR administrator can access privileged HR operations, such as:
+
+- Managing employee records
+- Managing departments
+- Reviewing leave requests
+- Managing recruitment information
+- Viewing HR-related statistics
+- Accessing administrative resources
+
+### Employee
+
+An employee can access permitted employee-related operations, such as:
+
+- Logging into the system
+- Viewing personal information
+- Applying for leave
+- Viewing leave status
+- Viewing attendance information
+- Accessing employee-specific resources
+
+> Access permissions depend on the authorization rules implemented in the application.
+
+---
+
+## Technology Stack
 
 ### Backend
 
 | Technology | Purpose |
-|---|---|
-| Java | Backend programming language |
+|------------|---------|
+| Java | Core programming language |
 | Spring Boot | Backend application framework |
 | Spring Web | REST API development |
-| Spring Data JPA | Database access |
-| Hibernate | ORM and persistence |
-| Spring Security | Application security |
-| JWT | Authentication and authorization |
+| Spring Data JPA | Data-access abstraction |
+| Hibernate | ORM implementation |
+| Spring Security | Authentication and authorization |
+| JWT | Stateless token-based authentication |
 | Maven | Dependency management and build automation |
 
-### Database and Tools
+### Database
 
 | Technology | Purpose |
-|---|---|
+|------------|---------|
 | MySQL | Relational database |
-| MySQL Workbench | Database management |
-| Swagger / OpenAPI | API documentation |
+| JPA | Persistence specification |
+| Hibernate | Entity-to-table mapping |
+| SQL | Database querying and management |
+
+### Development and Deployment Tools
+
+| Tool | Purpose |
+|------|---------|
+| IntelliJ IDEA / Eclipse / VS Code | Development |
 | Postman | API testing |
 | Git | Version control |
-| GitHub | Source code hosting |
-| VS Code / IntelliJ IDEA | Development environment |
+| GitHub | Source-code hosting |
+| Render | Backend deployment |
+| Railway | Cloud MySQL hosting |
 
 ---
 
-## 🏗️ System Architecture
+## System Architecture
+
+NexHR follows a layered architecture to maintain separation of concerns and improve code maintainability.
 
 ```text
-                         ┌─────────────────────────┐
-                         │       End User          │
-                         │   Admin / Employee      │
-                         └────────────┬────────────┘
-                                      │
-                                      ▼
-                         ┌─────────────────────────┐
-                         │     React Frontend      │
-                         │                         │
-                         │  Dashboard              │
-                         │  Employee Management    │
-                         │  Attendance             │
-                         │  Leave Management       │
-                         │  Documents              │
-                         │  Notifications          │
-                         └────────────┬────────────┘
-                                      │
-                                      │ HTTP / REST API
-                                      │ JWT Authorization
-                                      ▼
-                         ┌─────────────────────────┐
-                         │    Spring Boot API      │
-                         │                         │
-                         │  Controllers            │
-                         │  Services               │
-                         │  Repositories           │
-                         │  Security               │
-                         │  Validation             │
-                         │  Business Logic         │
-                         └────────────┬────────────┘
-                                      │
-                                      │ JPA / Hibernate
-                                      ▼
-                         ┌─────────────────────────┐
-                         │       MySQL Database    │
-                         │                         │
-                         │  Users                  │
-                         │  Employees              │
-                         │  Attendance             │
-                         │  Leave Requests         │
-                         │  Leave Balances         │
-                         │  Documents              │
-                         │  Notifications          │
-                         └─────────────────────────┘
+                         Frontend / API Client
+                                  |
+                                  v
+                         REST Controller Layer
+                                  |
+                                  v
+                            Service Layer
+                                  |
+                                  v
+                          Repository Layer
+                                  |
+                                  v
+                            MySQL Database
 ```
+
+### Architecture Flow
+
+```text
+HTTP Request
+     |
+     v
+Controller
+     |
+     v
+Service
+     |
+     v
+Repository
+     |
+     v
+Database
+     |
+     v
+Repository
+     |
+     v
+Service
+     |
+     v
+Controller
+     |
+     v
+HTTP Response
+```
+
+### Controller Layer
+
+The controller layer is responsible for handling incoming HTTP requests and returning HTTP responses.
+
+Responsibilities:
+
+- Define API endpoints
+- Receive request data
+- Validate request payloads
+- Call service methods
+- Return appropriate HTTP responses
+
+Controllers should focus on request handling rather than containing complex business logic.
+
+### Service Layer
+
+The service layer contains the application's business logic.
+
+Responsibilities:
+
+- Apply business rules
+- Process application workflows
+- Validate business conditions
+- Coordinate repository operations
+- Manage transactions where required
+
+For example, leave approval rules should be processed in the service layer.
+
+### Repository Layer
+
+The repository layer communicates with the database.
+
+Responsibilities:
+
+- Save records
+- Retrieve records
+- Update records
+- Delete records
+- Execute database queries
+
+Spring Data JPA reduces repetitive database-access code.
+
+### Entity Layer
+
+The entity layer represents database tables using Java classes.
+
+Example:
+
+```java
+@Entity
+@Table(name = "employees")
+public class Employee {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+}
+```
+
+### Security Layer
+
+The security layer handles:
+
+- User authentication
+- JWT validation
+- Password verification
+- Request authorization
+- Protected endpoint access
 
 ---
 
-## 🧩 Application Modules
+## Application Modules
+
+The application is organized into functional modules.
 
 ```text
 NexHR
 │
-├── Authentication Module
+├── Authentication
+│   ├── Registration
 │   ├── Login
-│   ├── JWT Token Handling
-│   └── Role-Based Access
+│   ├── JWT Generation
+│   └── JWT Validation
 │
-├── Employee Module
-│   ├── Add Employee
-│   ├── View Employees
+├── Employee Management
+│   ├── Create Employee
+│   ├── View Employee
 │   ├── Update Employee
 │   └── Delete Employee
 │
-├── Attendance Module
-│   ├── Attendance Records
-│   ├── Check-In / Check-Out
+├── Department Management
+│   ├── Create Department
+│   ├── View Departments
+│   └── Employee Assignment
+│
+├── Leave Management
+│   ├── Apply Leave
+│   ├── View Leave Requests
+│   ├── Approve Leave
+│   └── Reject Leave
+│
+├── Attendance Management
+│   ├── Record Attendance
+│   ├── View Attendance
 │   └── Attendance History
 │
-├── Leave Module
-│   ├── Apply for Leave
-│   ├── Leave Approval
-│   ├── Leave Rejection
-│   └── Leave Balance
+├── Recruitment Management
+│   ├── Job Openings
+│   ├── Candidate Records
+│   └── Application Tracking
 │
-├── Document Module
-│   ├── Upload Documents
-│   ├── View Documents
-│   └── Download Documents
-│
-├── Notification Module
-│   └── HR Notifications
-│
-└── Dashboard Module
-    └── HR Statistics and Summaries
+└── Dashboard
+    ├── Employee Statistics
+    ├── Leave Statistics
+    └── HR Summaries
 ```
+
+> This structure should be adjusted according to the modules actually implemented in the source code.
 
 ---
 
-## 📂 Project Structure
+## Authentication and Authorization
+
+NexHR uses JWT-based authentication for securing REST APIs.
+
+### Authentication Flow
 
 ```text
-NexHR/
+User enters login credentials
+             |
+             v
+Login endpoint receives credentials
+             |
+             v
+Backend validates the credentials
+             |
+             v
+Password is verified
+             |
+             v
+JWT token is generated
+             |
+             v
+Token is returned to the client
+             |
+             v
+Client sends token with future requests
+             |
+             v
+Spring Security validates the token
+             |
+             v
+Request is authorized or rejected
+```
+
+### Login Request
+
+```http
+POST /api/auth/login
+Content-Type: application/json
+```
+
+```json
+{
+  "email": "user@example.com",
+  "password": "your-password"
+}
+```
+
+### Login Response
+
+Example response:
+
+```json
+{
+  "token": "generated-jwt-token",
+  "message": "Login successful"
+}
+```
+
+The exact request and response structure depends on the implementation.
+
+### Sending the JWT Token
+
+For protected endpoints, the client sends the token using the `Authorization` header:
+
+```http
+Authorization: Bearer YOUR_JWT_TOKEN
+```
+
+### Authentication vs Authorization
+
+| Concept | Meaning |
+|---------|---------|
+| Authentication | Verifies who the user is |
+| Authorization | Verifies what the user is allowed to access |
+
+For example:
+
+- Login validates the user's identity.
+- Role-based authorization determines whether the user can approve a leave request.
+
+### Why JWT?
+
+JWT is useful for REST APIs because:
+
+- It supports stateless authentication.
+- It works well with separate frontend and backend applications.
+- It avoids maintaining a traditional server-side session for every request.
+- It can contain user identity and role-related claims.
+- It is suitable for distributed applications when implemented securely.
+
+---
+
+## Database Design
+
+NexHR uses MySQL as its relational database.
+
+A typical database structure may contain tables such as:
+
+```text
+users
+employees
+departments
+leave_requests
+attendance
+job_openings
+candidates
+applications
+```
+
+The exact table names depend on the entities implemented in the project.
+
+### Example Entity Relationships
+
+```text
+Department
+    |
+    | One-to-Many
+    v
+Employees
+    |
+    | One-to-Many
+    v
+Leave Requests
+```
+
+Recruitment relationship:
+
+```text
+Job Opening
+    |
+    | One-to-Many
+    v
+Applications
+    |
+    | Many-to-One
+    v
+Candidate
+```
+
+### Why MySQL?
+
+MySQL was selected because:
+
+- HR data is structured and relational.
+- Employee and department relationships are naturally represented using relational tables.
+- It supports primary keys and foreign keys.
+- It supports transactions.
+- It provides persistent storage.
+- It integrates well with Spring Data JPA and Hibernate.
+- It is widely used in enterprise applications.
+
+### JPA and Hibernate
+
+JPA defines a standard way to map Java objects to relational database tables.
+
+Hibernate is the ORM implementation used to perform operations such as:
+
+- Mapping entities to tables
+- Persisting objects
+- Retrieving records
+- Updating records
+- Managing relationships
+
+---
+
+## Project Structure
+
+The backend follows a modular Spring Boot project structure.
+
+```text
+springboot-backend/
 │
-├── react-frontend/
-│   │
-│   ├── public/
-│   │
-│   ├── src/
-│   │   ├── components/
-│   │   ├── pages/
-│   │   ├── services/
-│   │   ├── context/
-│   │   ├── routes/
-│   │   ├── assets/
-│   │   ├── App.js
-│   │   └── index.js
-│   │
-│   ├── package.json
-│   ├── package-lock.json
-│   └── .env.example
+├── .mvn/
+│   └── wrapper/
 │
-├── springboot-backend/
-│   │
-│   ├── src/
-│   │   ├── main/
-│   │   │   ├── java/
-│   │   │   │   └── ...
-│   │   │   └── resources/
-│   │   │       └── application.properties
+├── src/
+│   ├── main/
+│   │   ├── java/
+│   │   │   └── com/
+│   │   │       └── yourpackage/
+│   │   │           └── nexhr/
+│   │   │               │
+│   │   │               ├── NexHrApplication.java
+│   │   │               │
+│   │   │               ├── config/
+│   │   │               │   ├── SecurityConfig.java
+│   │   │               │   └── OtherConfig.java
+│   │   │               │
+│   │   │               ├── controller/
+│   │   │               │   ├── AuthController.java
+│   │   │               │   ├── EmployeeController.java
+│   │   │               │   └── ...
+│   │   │               │
+│   │   │               ├── service/
+│   │   │               │   ├── AuthService.java
+│   │   │               │   ├── EmployeeService.java
+│   │   │               │   └── ...
+│   │   │               │
+│   │   │               ├── repository/
+│   │   │               │   ├── UserRepository.java
+│   │   │               │   ├── EmployeeRepository.java
+│   │   │               │   └── ...
+│   │   │               │
+│   │   │               ├── entity/
+│   │   │               │   ├── User.java
+│   │   │               │   ├── Employee.java
+│   │   │               │   └── ...
+│   │   │               │
+│   │   │               ├── dto/
+│   │   │               │   ├── LoginRequest.java
+│   │   │               │   ├── LoginResponse.java
+│   │   │               │   └── ...
+│   │   │               │
+│   │   │               ├── security/
+│   │   │               │   ├── JwtService.java
+│   │   │               │   ├── JwtAuthenticationFilter.java
+│   │   │               │   └── ...
+│   │   │               │
+│   │   │               └── exception/
+│   │   │                   ├── GlobalExceptionHandler.java
+│   │   │                   └── ...
 │   │   │
-│   │   └── test/
+│   │   └── resources/
+│   │       ├── application.properties
+│   │       └── static/
 │   │
-│   ├── pom.xml
-│   ├── .env.example
-│   └── uploads/
+│   └── test/
+│       └── java/
 │
 ├── .gitignore
+├── pom.xml
+├── mvnw
+├── mvnw.cmd
 └── README.md
 ```
 
-> The exact package names and internal folders may vary according to the implementation.
+### Layer Responsibilities
+
+| Package | Responsibility |
+|---------|----------------|
+| `controller` | Handles HTTP requests |
+| `service` | Contains business logic |
+| `repository` | Communicates with the database |
+| `entity` | Defines database entities |
+| `dto` | Transfers request and response data |
+| `security` | Handles JWT and security logic |
+| `config` | Stores application configuration |
+| `exception` | Handles application exceptions |
 
 ---
 
-## 🔄 Application Workflow
+## API Documentation
 
-```text
-User opens the application
-          │
-          ▼
-Authentication page
-          │
-          ▼
-Credentials submitted
-          │
-          ▼
-Spring Boot validates credentials
-          │
-          ▼
-JWT token generated
-          │
-          ▼
-Frontend stores authentication state
-          │
-          ▼
-Protected dashboard becomes accessible
-          │
-          ▼
-User performs HR operations
-          │
-          ▼
-React sends REST API request
-          │
-          ▼
-Spring Boot validates token and permissions
-          │
-          ▼
-Business logic is executed
-          │
-          ▼
-MySQL data is created / updated / retrieved
-          │
-          ▼
-Response is returned to React
-          │
-          ▼
-UI updates with the latest information
+The following endpoints represent the expected API organization.
+
+> Verify the exact endpoint paths in the controller classes before publishing this documentation.
+
+### Authentication APIs
+
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| `POST` | `/api/auth/register` | Register a new user |
+| `POST` | `/api/auth/login` | Authenticate a user |
+| `GET` | `/api/auth/me` | Retrieve authenticated user details |
+
+### Employee APIs
+
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| `GET` | `/api/employees` | Retrieve all employees |
+| `GET` | `/api/employees/{id}` | Retrieve an employee by ID |
+| `POST` | `/api/employees` | Create a new employee |
+| `PUT` | `/api/employees/{id}` | Update employee information |
+| `DELETE` | `/api/employees/{id}` | Delete an employee |
+
+### Department APIs
+
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| `GET` | `/api/departments` | Retrieve all departments |
+| `GET` | `/api/departments/{id}` | Retrieve a department by ID |
+| `POST` | `/api/departments` | Create a department |
+| `PUT` | `/api/departments/{id}` | Update a department |
+| `DELETE` | `/api/departments/{id}` | Delete a department |
+
+### Leave APIs
+
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| `GET` | `/api/leaves` | Retrieve leave requests |
+| `GET` | `/api/leaves/{id}` | Retrieve a leave request |
+| `POST` | `/api/leaves` | Apply for leave |
+| `PUT` | `/api/leaves/{id}` | Update leave information |
+| `DELETE` | `/api/leaves/{id}` | Delete a leave request |
+
+### Attendance APIs
+
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| `GET` | `/api/attendance` | Retrieve attendance records |
+| `GET` | `/api/attendance/{id}` | Retrieve attendance by ID |
+| `POST` | `/api/attendance` | Create an attendance record |
+| `PUT` | `/api/attendance/{id}` | Update attendance |
+| `DELETE` | `/api/attendance/{id}` | Delete attendance |
+
+---
+
+## Configuration
+
+The application uses environment-based configuration to keep deployment-specific values and sensitive credentials outside the source code.
+
+### Example `application.properties`
+
+```properties
+server.port=${PORT:8080}
+
+spring.datasource.url=${DB_URL}
+spring.datasource.username=${DB_USERNAME}
+spring.datasource.password=${DB_PASSWORD}
+spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
+
+spring.jpa.hibernate.ddl-auto=update
+
+app.jwt.secret=${JWT_SECRET}
+app.jwt.expiration-ms=${JWT_EXPIRATION_MS:86400000}
 ```
 
----
+### Configuration Explanation
 
-## 🔒 Security Implementation
+| Property | Description |
+|----------|-------------|
+| `server.port` | Uses the hosting platform's port or defaults to `8080` |
+| `spring.datasource.url` | MySQL JDBC connection URL |
+| `spring.datasource.username` | Database username |
+| `spring.datasource.password` | Database password |
+| `spring.jpa.hibernate.ddl-auto` | Controls Hibernate schema behavior |
+| `app.jwt.secret` | Secret used to sign JWT tokens |
+| `app.jwt.expiration-ms` | JWT expiration duration in milliseconds |
 
-NexHR follows a security-oriented architecture for protecting application data and restricted operations.
+### Optional Hibernate Dialect
 
-### Security Measures
+Hibernate can generally detect the MySQL dialect automatically.
 
-- JWT-based authentication
-- Protected API endpoints
-- Role-based authorization
-- Authentication filters
-- Secure password handling
-- CORS configuration
-- Environment-based configuration
-- Restricted document access
-- Separation of authentication and business logic
-- Server-side validation of requests
+Therefore, this property is usually unnecessary:
 
-### Environment Security
-
-Sensitive configuration values are not committed to the repository.
-
-Examples of sensitive values include:
-
-```text
-Database passwords
-JWT signing secrets
-Administrator passwords
-Production credentials
-Private API keys
+```properties
+spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQLDialect
 ```
 
-The repository contains `.env.example` files with placeholder values only.
+If it is already present and working, it is not generally a critical issue, but it can be removed in modern Hibernate configurations.
 
 ---
 
-## 🗃️ Database Design
+## Environment Variables
 
-The system uses MySQL as its relational database.
+### Local Development
 
-The database is responsible for storing and managing information related to:
+For local development, the application may use a local MySQL database.
 
-- Users
-- Employees
-- Departments
-- Attendance records
-- Leave requests
-- Leave balances
-- Documents
-- Notifications
+Example:
 
-The backend uses Spring Data JPA and Hibernate to map Java entities to relational database tables.
+```env
+DB_URL=jdbc:mysql://localhost:3306/nexhr
+DB_USERNAME=root
+DB_PASSWORD=your_local_mysql_password
+
+JWT_SECRET=your_long_random_secret
+JWT_EXPIRATION_MS=86400000
+```
+
+### Production Environment
+
+For production, use a cloud-hosted MySQL database such as Railway.
+
+Example:
+
+```env
+DB_URL=jdbc:mysql://YOUR_RAILWAY_PUBLIC_HOST:YOUR_RAILWAY_PUBLIC_PORT/YOUR_DATABASE
+DB_USERNAME=YOUR_RAILWAY_USERNAME
+DB_PASSWORD=YOUR_RAILWAY_PASSWORD
+
+JWT_SECRET=YOUR_PRODUCTION_JWT_SECRET
+JWT_EXPIRATION_MS=86400000
+```
+
+### Important Environment Variable Rules
+
+- Never commit `.env` files to GitHub.
+- Never hardcode production passwords.
+- Never expose JWT secrets.
+- Never share database credentials publicly.
+- Use separate credentials for local and production environments.
+- Ensure the variable names match the names used in `application.properties`.
 
 ---
 
-## 🚀 Installation and Setup
+## Prerequisites
 
-### Prerequisites
+Before running the application, install the following:
 
-Install the following before running the project:
-
-- Java JDK 17 or later
-- Node.js
-- npm
-- MySQL Server
-- MySQL Workbench
-- Git
+- Java 17 or later
 - Maven or Maven Wrapper
+- MySQL 8 or a compatible version
+- Git
+- Postman, optionally
+- An IDE such as IntelliJ IDEA, Eclipse, or VS Code
 
-Verify your installations:
+### Verify Java
 
 ```bash
 java -version
-node -v
-npm -v
-mysql --version
+```
+
+### Verify Maven
+
+```bash
+mvn -version
 ```
 
 ---
+
+## Installation and Setup
 
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/DhruvTalati/NexHR.git
+git clone https://github.com/YOUR_USERNAME/YOUR_REPOSITORY.git
 ```
 
-Navigate into the project:
-
-```bash
-cd NexHR
-```
-
----
-
-### 2. Create the MySQL Database
-
-Open MySQL Workbench or the MySQL command line.
-
-Create the database:
-
-```sql
-CREATE DATABASE employee_management_system;
-```
-
----
-
-### 3. Configure the Backend
-
-Navigate to the backend folder:
+Navigate into the backend directory:
 
 ```bash
 cd springboot-backend
 ```
 
-Create a local `.env` file using `.env.example` as a reference.
+### 2. Create the MySQL Database
+
+Open MySQL and execute:
+
+```sql
+CREATE DATABASE nexhr;
+```
+
+### 3. Configure the Database
+
+For local development, configure your database connection using environment variables or your local configuration.
 
 Example:
 
-```env
-DB_URL=jdbc:mysql://localhost:3306/employee_management_system
-DB_USERNAME=root
-DB_PASSWORD=YOUR_MYSQL_PASSWORD
-
-JWT_SECRET=YOUR_LONG_RANDOM_JWT_SECRET
-JWT_EXPIRATION_MS=86400000
-
-CORS_ALLOWED_ORIGIN=http://localhost:3000
-
-ADMIN_EMAIL=admin@ems.local
-ADMIN_PASSWORD=YOUR_ADMIN_PASSWORD
-
-FILE_STORAGE_LOCATION=./uploads/documents
-MAX_FILE_SIZE=10MB
-MAX_REQUEST_SIZE=12MB
+```properties
+spring.datasource.url=jdbc:mysql://localhost:3306/nexhr
+spring.datasource.username=root
+spring.datasource.password=your_password
 ```
 
-> Do not commit the real `.env` file to GitHub.
+For production, use the cloud database URL provided by Railway or another MySQL hosting provider.
+
+### 4. Install Dependencies
+
+Using Maven Wrapper on Windows:
+
+```bash
+mvnw.cmd clean install
+```
+
+Using Maven Wrapper on Linux or macOS:
+
+```bash
+./mvnw clean install
+```
+
+Using installed Maven:
+
+```bash
+mvn clean install
+```
 
 ---
 
-### 4. Run the Backend
+## Running the Application
 
-From the `springboot-backend` directory:
+### Run Using Maven Wrapper
 
 #### Windows
 
-```powershell
-.\mvnw.cmd spring-boot:run
+```bash
+mvnw.cmd spring-boot:run
 ```
 
-#### macOS / Linux
+#### Linux/macOS
 
 ```bash
 ./mvnw spring-boot:run
 ```
 
-#### Using installed Maven
+### Run Using Maven
 
 ```bash
 mvn spring-boot:run
 ```
 
-The backend will run at:
+### Build the Application
+
+```bash
+mvn clean package
+```
+
+### Run the Generated JAR
+
+```bash
+java -jar target/your-application-name.jar
+```
+
+The backend will normally be available at:
 
 ```text
 http://localhost:8080
 ```
 
----
-
-### 5. Open Swagger Documentation
-
-If Swagger is enabled, open:
-
-```text
-http://localhost:8080/swagger-ui/index.html
-```
-
-Alternative path:
-
-```text
-http://localhost:8080/swagger-ui.html
-```
-
-Swagger can be used to inspect and test the available REST APIs.
+The actual port depends on the configured `server.port` value.
 
 ---
 
-### 6. Configure the Frontend
+## Testing the APIs
 
-Open a new terminal and navigate to the frontend:
+Postman can be used to test the REST APIs.
+
+### Recommended Testing Flow
+
+1. Register a user.
+2. Log in using the registered credentials.
+3. Copy the JWT token from the login response.
+4. Open a protected API endpoint.
+5. Add the token to the Authorization header.
+6. Send the request.
+7. Verify the response.
+8. Verify database changes when applicable.
+
+### Example Public Request
+
+```http
+GET http://localhost:8080/api/employees
+```
+
+### Example Protected Request
+
+```http
+GET http://localhost:8080/api/employees
+Authorization: Bearer YOUR_JWT_TOKEN
+```
+
+### Example JSON Request
+
+```http
+POST http://localhost:8080/api/employees
+Content-Type: application/json
+Authorization: Bearer YOUR_JWT_TOKEN
+```
+
+```json
+{
+  "firstName": "John",
+  "lastName": "Doe",
+  "email": "john.doe@example.com",
+  "department": "Engineering"
+}
+```
+
+The exact JSON fields depend on the employee entity and DTO implemented in the project.
+
+---
+
+## Deployment
+
+The backend can be deployed to Render and connected to a cloud-hosted MySQL database on Railway.
+
+### Production Architecture
+
+```text
+                         Frontend
+                            |
+                            v
+                    Render Spring Boot API
+                            |
+                            v
+                    Railway MySQL Database
+```
+
+### Deployment Flow
+
+```text
+Developer
+    |
+    v
+GitHub Repository
+    |
+    v
+Render Build Process
+    |
+    v
+Spring Boot Application
+    |
+    v
+Cloud MySQL Database
+```
+
+### Deploying to Render
+
+1. Push the backend source code to GitHub.
+2. Log in to Render.
+3. Create a new Web Service.
+4. Connect your GitHub repository.
+5. Select the backend project.
+6. Configure the build command.
+7. Configure the start command.
+8. Add environment variables.
+9. Deploy the service.
+10. Review deployment logs.
+11. Test the live API.
+
+### Example Build Command
 
 ```bash
-cd react-frontend
+./mvnw clean package -DskipTests
 ```
 
-Install dependencies:
+Depending on the Render environment, the build command may need to be adjusted.
+
+### Example Start Command
 
 ```bash
-npm install
+java -jar target/*.jar
 ```
 
-Create a `.env` file:
+The exact command may need to match the generated JAR filename.
 
-```env
-REACT_APP_API_URL=http://localhost:8080
-```
-
-> Use the exact environment variable name expected by the frontend implementation.
-
----
-
-### 7. Start the Frontend
-
-```bash
-npm start
-```
-
-The frontend will generally run at:
+### Required Render Environment Variables
 
 ```text
-http://localhost:3000
+DB_URL
+DB_USERNAME
+DB_PASSWORD
+JWT_SECRET
+JWT_EXPIRATION_MS
 ```
 
----
+### Important Database Configuration
 
-## ⚙️ Environment Variables
+A deployed backend cannot use your local computer's MySQL database through `localhost`.
 
-### Backend Environment Variables
-
-| Variable | Required | Description |
-|---|---:|---|
-| `DB_URL` | Yes | MySQL JDBC connection URL |
-| `DB_USERNAME` | Yes | MySQL database username |
-| `DB_PASSWORD` | Yes | MySQL database password |
-| `JWT_SECRET` | Yes | Secret used for signing JWT tokens |
-| `JWT_EXPIRATION_MS` | No | JWT expiration time in milliseconds |
-| `CORS_ALLOWED_ORIGIN` | Yes | Frontend URL allowed by CORS |
-| `ADMIN_EMAIL` | No | Initial administrator email |
-| `ADMIN_PASSWORD` | Yes | Initial administrator password |
-| `FILE_STORAGE_LOCATION` | No | Storage location for uploaded documents |
-| `MAX_FILE_SIZE` | No | Maximum size of an individual file |
-| `MAX_REQUEST_SIZE` | No | Maximum size of a multipart request |
-
-### Frontend Environment Variables
-
-| Variable | Description |
-|---|---|
-| `REACT_APP_API_URL` | Base URL of the Spring Boot backend |
-
----
-
-## 📡 API Overview
-
-The backend exposes REST APIs for the major application modules.
-
-| API Module | Operations |
-|---|---|
-| Authentication | Login and authentication |
-| Employees | Create, read, update, and delete employees |
-| Attendance | Record and retrieve attendance |
-| Leaves | Apply, view, approve, and reject leave requests |
-| Leave Balances | View and manage leave balances |
-| Documents | Upload, view, and download documents |
-| Notifications | Retrieve system notifications |
-| Users | Manage users and roles |
-
-The complete API documentation can be accessed through Swagger after starting the backend.
-
----
-
-## 🧪 Testing
-
-The APIs can be tested using:
-
-- Swagger UI
-- Postman
-- Browser developer tools
-- Frontend integration testing
-
-Recommended testing areas:
-
-- Login with valid credentials
-- Login with invalid credentials
-- Protected route access
-- Employee CRUD operations
-- Attendance creation and retrieval
-- Leave request submission
-- Leave approval and rejection
-- Document upload and access
-- Unauthorized API requests
-- Invalid or missing request data
-
----
-
-## 🌍 Deployment Architecture
-
-NexHR can be deployed using separate services for the frontend, backend, and database.
+This will not work in production:
 
 ```text
-                         ┌──────────────────────┐
-                         │   React Frontend      │
-                         │   Vercel / Hosting    │
-                         └──────────┬───────────┘
-                                    │
-                                    │ HTTPS REST API
-                                    ▼
-                         ┌──────────────────────┐
-                         │  Spring Boot Backend │
-                         │  Render / Cloud Host │
-                         └──────────┬───────────┘
-                                    │
-                                    │ Database Connection
-                                    ▼
-                         ┌──────────────────────┐
-                         │    MySQL Database    │
-                         │ Railway / Cloud DB   │
-                         └──────────────────────┘
+jdbc:mysql://localhost:3306/nexhr
 ```
 
-### Production Configuration
+For Render, use a publicly reachable cloud database:
 
-For deployment:
-
-- Configure production environment variables in the hosting platform
-- Set the frontend API URL to the deployed backend URL
-- Configure backend CORS for the deployed frontend domain
-- Use a production database
-- Use a strong JWT secret
-- Never commit production credentials
-- Configure persistent storage for uploaded documents when required
-- Use HTTPS in production
+```text
+jdbc:mysql://RAILWAY_PUBLIC_HOST:RAILWAY_PUBLIC_PORT/RAILWAY_DATABASE
+```
 
 ---
 
-## 📸 Screenshots
+## Railway MySQL Configuration
 
-Add screenshots of the application below.
+Railway can be used to host the production MySQL database.
 
-Recommended screenshots:
+### Railway Setup
 
-1. Login page
-2. Admin dashboard
-3. Employee management page
-4. Add employee form
-5. Employee profile
-6. Attendance management
-7. Leave management
-8. Document management
-9. Notifications
-10. Swagger API documentation
+1. Open Railway.
+2. Create a new project.
+3. Select **Provision MySQL**.
+4. Wait for the database service to become available.
+5. Open the MySQL service.
+6. Open the Variables or Connect section.
+7. Copy the public host, port, database name, username, and password.
+
+### JDBC URL Format
+
+The Spring Boot JDBC URL follows this format:
+
+```text
+jdbc:mysql://HOST:PORT/DATABASE
+```
 
 Example:
 
-```markdown
-![NexHR Dashboard](screenshots/dashboard.png)
+```text
+jdbc:mysql://your-railway-host:12345/railway
+```
+
+Replace the example values with the actual Railway connection details.
+
+### Render Database Variables
+
+```text
+DB_URL=jdbc:mysql://YOUR_RAILWAY_PUBLIC_HOST:YOUR_RAILWAY_PUBLIC_PORT/YOUR_DATABASE
+DB_USERNAME=YOUR_RAILWAY_USERNAME
+DB_PASSWORD=YOUR_RAILWAY_PASSWORD
+```
+
+> Use the public Railway host and public port when the backend is hosted on Render.
+
+---
+
+## Migrating the Local Database
+
+If the local MySQL database already contains data, export and import it into the cloud database.
+
+### Export Using phpMyAdmin
+
+1. Open phpMyAdmin:
+
+```text
+http://localhost/phpmyadmin
+```
+
+2. Select the local database.
+3. Click **Export**.
+4. Select **Quick** export.
+5. Choose the SQL format.
+6. Click **Export**.
+
+This will download an SQL file.
+
+### Importing the SQL File
+
+The SQL file can be imported into the cloud database using a supported database client such as:
+
+- MySQL Workbench
+- MySQL command-line client
+- Railway-compatible database tools
+
+Example command:
+
+```bash
+mysql -h YOUR_RAILWAY_HOST -P YOUR_RAILWAY_PORT -u YOUR_RAILWAY_USERNAME -p YOUR_DATABASE_NAME < nexhr.sql
+```
+
+You will be prompted to enter the database password.
+
+Replace all placeholders before running the command.
+
+---
+
+## Production Configuration
+
+The production environment should use secure and externally managed configuration.
+
+### Recommended Production Configuration
+
+```properties
+server.port=${PORT:8080}
+
+spring.datasource.url=${DB_URL}
+spring.datasource.username=${DB_USERNAME}
+spring.datasource.password=${DB_PASSWORD}
+spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
+
+spring.jpa.hibernate.ddl-auto=update
+
+app.jwt.secret=${JWT_SECRET}
+app.jwt.expiration-ms=${JWT_EXPIRATION_MS:86400000}
+```
+
+### Production Recommendations
+
+- Use a dedicated database user instead of the MySQL root user.
+- Use a strong JWT secret.
+- Enable SSL for database connections when required.
+- Avoid exposing sensitive configuration in logs.
+- Restrict CORS to trusted frontend origins.
+- Use HTTPS in production.
+- Use database backups.
+- Avoid using `ddl-auto=update` blindly in critical production systems.
+- Prefer database migration tools such as Flyway or Liquibase for controlled schema changes.
+- Enable monitoring and application logging.
+
+---
+
+## Security Practices
+
+NexHR follows security-oriented backend practices.
+
+### Password Hashing
+
+Passwords should never be stored as plain text.
+
+A password encoder such as BCrypt can be used:
+
+```java
+PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+```
+
+### JWT Secret Protection
+
+The JWT secret should be stored as an environment variable:
+
+```properties
+app.jwt.secret=${JWT_SECRET}
+```
+
+It should not be hardcoded in the source code.
+
+### Protected APIs
+
+Protected endpoints require a valid JWT token.
+
+```http
+Authorization: Bearer YOUR_JWT_TOKEN
+```
+
+### Input Validation
+
+Incoming request data should be validated before processing.
+
+Examples include:
+
+- Required fields
+- Email format
+- Valid dates
+- Valid IDs
+- Valid leave duration
+- Duplicate record prevention
+
+### Database Security
+
+- Use environment variables for credentials.
+- Avoid using the root database user in production.
+- Use strong database passwords.
+- Restrict database access where possible.
+- Use encrypted connections when required.
+- Do not expose database credentials in GitHub.
+
+### CORS
+
+When the frontend and backend are hosted on different domains, CORS must be configured correctly.
+
+For production, allow only trusted frontend origins instead of allowing all origins.
+
+---
+
+## Error Handling
+
+The backend should return meaningful HTTP status codes and structured error responses.
+
+| Status Code | Meaning |
+|-------------|---------|
+| `200 OK` | Request completed successfully |
+| `201 Created` | Resource created successfully |
+| `204 No Content` | Request succeeded without a response body |
+| `400 Bad Request` | Invalid request data |
+| `401 Unauthorized` | Authentication is missing or invalid |
+| `403 Forbidden` | User does not have permission |
+| `404 Not Found` | Requested resource does not exist |
+| `409 Conflict` | Request conflicts with existing data |
+| `500 Internal Server Error` | Unexpected server-side error |
+
+### Example Error Response
+
+```json
+{
+  "status": 404,
+  "message": "Employee not found",
+  "timestamp": "2026-09-18T12:00:00"
+}
+```
+
+The actual error response structure depends on the exception-handling implementation.
+
+---
+
+## Challenges and Solutions
+
+### 1. Local Database Connectivity During Deployment
+
+#### Challenge
+
+The application worked locally using a MySQL connection such as:
+
+```text
+jdbc:mysql://localhost:3306/nexhr
+```
+
+However, this connection failed after deployment because `localhost` on Render refers to the Render container, not the developer's local computer.
+
+#### Solution
+
+A cloud-hosted MySQL database was configured using Railway. The production database connection details were added to Render environment variables.
+
+---
+
+### 2. Protecting Sensitive Credentials
+
+#### Challenge
+
+Hardcoding database credentials and JWT secrets in source code creates security risks.
+
+#### Solution
+
+Sensitive values were externalized using environment variables:
+
+```properties
+spring.datasource.url=${DB_URL}
+spring.datasource.username=${DB_USERNAME}
+spring.datasource.password=${DB_PASSWORD}
+app.jwt.secret=${JWT_SECRET}
 ```
 
 ---
 
-## 📈 Future Enhancements
+### 3. Cloud Port Configuration
 
-Planned improvements for NexHR include:
+#### Challenge
 
-- Employee self-service portal
-- Payroll management
-- Recruitment and applicant tracking
-- Performance management
-- Employee appraisal system
-- Advanced HR analytics
-- PDF and Excel report generation
-- Email notifications
-- Calendar integration
-- Automated attendance integration
-- Cloud-based document storage
-- Audit logs
-- Two-factor authentication
-- Multi-organization support
-- Improved mobile responsiveness
+Cloud hosting platforms may assign a port dynamically through the `PORT` environment variable.
+
+#### Solution
+
+The application was configured using:
+
+```properties
+server.port=${PORT:8080}
+```
+
+This allows the application to use the cloud-provided port while retaining port `8080` as the local default.
 
 ---
 
-## 🎯 Key Learning Outcomes
+### 4. Maintaining Separation of Concerns
 
-This project demonstrates practical knowledge of:
+#### Challenge
 
-- Full-stack web application development
-- React component architecture
-- RESTful API development
-- Spring Boot application design
-- Spring Security
-- JWT authentication
-- Role-based authorization
-- MySQL database integration
+Putting all application logic inside controllers makes the code difficult to maintain and test.
+
+#### Solution
+
+The application follows a layered structure:
+
+```text
+Controller → Service → Repository → Database
+```
+
+This separation improves readability, maintainability, testing, and scalability.
+
+---
+
+### 5. Managing Relational Data
+
+#### Challenge
+
+HR systems contain relationships between employees, departments, leave requests, attendance records, and other entities.
+
+#### Solution
+
+MySQL, JPA, and Hibernate were used to represent relational data through entity classes and relationships.
+
+---
+
+## Future Enhancements
+
+The following features can be added in future versions:
+
+- Refresh-token authentication
+- Password reset functionality
+- Email notifications
+- Employee document management
+- Payroll management
+- Performance review management
+- Advanced attendance analytics
+- Leave balance calculation
+- Audit logs
+- Pagination and sorting
+- Advanced filtering and search
+- Swagger/OpenAPI documentation
+- Unit and integration testing
+- CI/CD pipeline
+- Docker containerization
+- Cloud file storage
+- Real-time notifications
+- Multi-organization support
+- Employee self-service portal
+- Reporting and analytics dashboard
+
+---
+
+## Learning Outcomes
+
+This project helped develop practical knowledge of:
+
+### Java and Spring Boot
+
+- Spring Boot application development
+- REST controller creation
+- Dependency injection
+- Service and repository patterns
+- Application configuration
+- Exception handling
+- Backend project organization
+
+### Database Development
+
+- MySQL database management
+- SQL queries
+- Entity relationships
 - JPA and Hibernate
 - CRUD operations
-- File upload handling
-- Frontend-backend communication
-- Environment-based secret management
-- API documentation with Swagger
+- Database connectivity
+- Relational data modeling
+
+### Security
+
+- Spring Security
+- JWT authentication
+- Password hashing
+- Role-based authorization
+- Protected API endpoints
+- Secure configuration management
+
+### Deployment
+
 - Git and GitHub
-- Deployment architecture
+- Cloud deployment
+- Render configuration
+- Railway database hosting
+- Environment variables
+- Production debugging
+- Cloud database connectivity
+
+### Software Engineering
+
+- Layered architecture
+- Separation of concerns
+- REST API design
+- Maintainable project structure
+- Error handling
+- Configuration management
+- Deployment troubleshooting
 
 ---
 
-## 🤝 Contributing
+## Project Demonstration
 
-Contributions and suggestions are welcome.
+### Backend
 
-### Contribution Steps
+- Backend Framework: Spring Boot
+- Database: MySQL
+- Authentication: JWT
+- API Style: REST
+- Deployment: Render
 
-1. Fork the repository.
-2. Clone your fork.
+### Database
 
-```bash
-git clone https://github.com/YOUR_USERNAME/NexHR.git
-```
+- Local Development Database: MySQL
+- Production Database: Railway MySQL
 
-3. Create a feature branch.
+### API Testing
 
-```bash
-git checkout -b feature/your-feature-name
-```
+Recommended tool:
 
-4. Make your changes.
-5. Commit your changes.
-
-```bash
-git commit -m "Add: your feature description"
-```
-
-6. Push the branch.
-
-```bash
-git push origin feature/your-feature-name
-```
-
-7. Open a Pull Request.
+- Postman
 
 ---
 
-## 📄 License
+## Author
 
-This project is intended for educational, portfolio, and demonstration purposes.
+**Dhruv Talati**
 
-A formal open-source license may be added in the future.
+- GitHub: `https://github.com/DhruvTalati`
 
----
-
-## 👨‍💻 Author
-
-<div align="center">
-
-### Dhruv Talati
-
-B.Tech Information Technology Student  
-Full-Stack Developer
-
-**Specializing in:** React.js • Java • Spring Boot • MySQL • REST APIs
-
-<br />
-
-[![GitHub](https://img.shields.io/badge/GitHub-DhruvTalati-181717?style=for-the-badge&logo=github)](https://github.com/DhruvTalati)
-
-</div>
 
 ---
 
-<div align="center">
+## License
 
-### ⭐ If you find NexHR useful, consider starring the repository!
+This project is developed for educational and portfolio purposes.
 
-Built with dedication using React, Spring Boot, Java, and MySQL.
-
-</div>
+You may modify and extend the project according to your requirements.
